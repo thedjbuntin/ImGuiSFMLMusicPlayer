@@ -152,16 +152,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\imgui\imgui-SFML.cpp" />
-    <ClCompile Include="..\..\..\..\imgui\imgui.cpp" />
-    <ClCompile Include="..\..\..\..\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\..\..\..\imgui\imgui_draw.cpp" />
+    <ClCompile Include="D:\imgui\imgui-SFML.cpp" />
+    <ClCompile Include="D:\imgui\imgui.cpp" />
+    <ClCompile Include="D:\imgui\imgui_demo.cpp" />
+    <ClCompile Include="D:\imgui\imgui_draw.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MusicPlayer_Application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\imgui\imgui-SFML.h" />
-    <ClInclude Include="..\..\..\..\imgui\imgui.h" />
+    <ClInclude Include="D:\imgui\imgui-SFML.h" />
+    <ClInclude Include="D:\imgui\imgui.h" />
     <ClInclude Include="MusicPlayer_Application.h" />
     <ClInclude Include="sfml.h" />
   </ItemGroup>

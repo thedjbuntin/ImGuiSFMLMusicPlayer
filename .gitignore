@@ -90,6 +90,8 @@ bld/
 *.pidb
 *.svclog
 *.scc
+*.VC.opendb
+*.VC.db
 
 # Others
 ClientBin/
