@@ -11,6 +11,12 @@ More About Me: http://duncanbunting.com
 
 ---
 
+Early Development Issue Tracking: https://docs.google.com/spreadsheets/d/1c5FJh6jmOxvn2W8SCCa5x8n5d-v1SeSz_31nJoxhd5w/edit?usp=sharing
+- To avoid an insane number of issues on GitHub (and that I've never used GitHub Issues before) the first stage of issue tracking (aka my To-Do list) can be found at the above Google Doc link.
+- Once first release (13th or 14th) I will switch to GitHub Issues and leave the Google Doc
+
+---
+
 Download following to allow to work:
 
 SFML 2.4.2 : https://www.sfml-dev.org/download/sfml/2.4.2/
