@@ -2,6 +2,7 @@
 
 int main()
 {
+	sf::RenderWindow window(sf::VideoMode(1200, 700), "Duncan Bunting's Music Player");
 	window.setFramerateLimit(60);
 	ImGui::SFML::Init(window);
 
