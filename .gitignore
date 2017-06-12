@@ -1,6 +1,10 @@
 # Concept Folder
 [Cc]oncepting/
 
+# Art Files
+*.jpg
+*.png
+
 # Music Files - Alternatively, ignore Music folder; however, to provide README instructions chosen this method.
 *.ogg
 *.wav

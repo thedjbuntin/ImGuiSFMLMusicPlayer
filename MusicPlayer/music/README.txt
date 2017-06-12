@@ -2,9 +2,18 @@ Place Music Files Here
 
 ---
 
-MP3 will not work due to Patent issues. Please use one of the below formats:
+MP3 will not work due to Patent issues. 
 
-*.ogg	(recommended)
+Please use: 
+
+*.ogg
+
+
+---
+
+I've limited the program to only take .ogg files just to make the file checking easier (it would throw lots of errors and crash due other files like pngs)
+You can easily code the program to accept the following files by removing the limitation to only .ogg and replacing it with some check to exclude the jpg/png art:
+
 *.wav
 *.flac
 *.aiff

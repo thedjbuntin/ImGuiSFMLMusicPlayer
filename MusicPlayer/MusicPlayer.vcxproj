@@ -158,12 +158,14 @@
     <ClCompile Include="D:\imgui\imgui_draw.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MusicPlayer_Application.cpp" />
+    <ClCompile Include="Track.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\imgui\imgui-SFML.h" />
     <ClInclude Include="D:\imgui\imgui.h" />
     <ClInclude Include="MusicPlayer_Application.h" />
     <ClInclude Include="sfml.h" />
+    <ClInclude Include="Track.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
