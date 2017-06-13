@@ -16,7 +16,7 @@ void Track::Update()
 	if (isAutoPlay && !MusicTrack[CurrentTrackID_]->getLoop())	//if autoplay enabled(true by default) and not set to loop
 	{
 		if (MusicTrack[CurrentTrackID_]->getPlayingOffset().asSeconds() >= MusicTrack[CurrentTrackID_]->getDuration().asSeconds() - 0.5f)
-		{
+		{	//When within 0.5 seconds of finishing, move onto next track.
 			Next();
 		}
 	}
@@ -74,6 +74,23 @@ void Track::StartNew(bool isNext)
 	MusicTrack[CurrentTrackID_]->setVolume(volume_);	//Keep Same Volume Level
 	MusicTrack[CurrentTrackID_]->stop();				//Ensure Starting from Start
 	if(isPlaying_)									//Only if user has set to play
+		MusicTrack[CurrentTrackID_]->play();				//Play New Track
+}
+
+void Track::StartNew(int _NewTrackID)
+{
+	// Stop Current Track
+	if (MusicTrack[CurrentTrackID_]->getLoop())
+		MusicTrack[CurrentTrackID_]->setLoop(false);
+	MusicTrack[CurrentTrackID_]->stop();
+	
+	//	Set New Track ID
+	CurrentTrackID_ = _NewTrackID;
+
+	// Prepare and Start New Track
+	MusicTrack[CurrentTrackID_]->setVolume(volume_);	//Keep Same Volume Level
+	MusicTrack[CurrentTrackID_]->stop();				//Ensure Starting from Start
+	if (isPlaying_)									//Only if user has set to play
 		MusicTrack[CurrentTrackID_]->play();				//Play New Track
 }
 

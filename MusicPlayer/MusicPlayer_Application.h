@@ -26,10 +26,10 @@ private:
 	sf::Clock deltaClock;
 	Track MusicTrack;
 	sf::Sprite TrackArt;
+	std::vector<std::string> SongList;
 
 	const std::string MusicDirectory = "music";
 	const char* cPlay = "Play";
 	const char* cPause = "Pause";
 	bool isVolume, isTrackList;
-	int current_track;
 };

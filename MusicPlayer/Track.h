@@ -32,6 +32,7 @@ public:
 	float Duration() const { return MusicTrack[CurrentTrackID_]->getDuration().asSeconds(); }
 	
 	int CurrentTrackID() const { return CurrentTrackID_; }
+	void SetTrackID(const int _trackID) { StartNew(_trackID); }
 
 	bool isPlaying() const { return isPlaying_; }
 
@@ -39,6 +40,8 @@ public:
 	std::string Name() const { return SongName[CurrentTrackID_]; }
 	sf::Texture Art() const { return ArtTexture[CurrentTrackID_]; }
 	std::string ArtPath() const { return ArtPath_[CurrentTrackID_]; }
+
+	std::vector<std::string> List() const { return SongName; }
 
 	void Import(const std::string &directory);	//Possibly move to constructor?
 private:
@@ -48,6 +51,7 @@ private:
 	// CleanUp Current Track and Start New - Moved to own function since near-duplicated in Prev() and Next()
 	//isNext = true if next track, false if previous track
 	void StartNew(bool isNext);
+	void StartNew(int NewTrackID);
 
 	float volume_;
 	bool isPlaying_, isAutoPlay;

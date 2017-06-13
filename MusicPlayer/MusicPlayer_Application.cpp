@@ -9,11 +9,11 @@ MusicPlayer::MusicPlayer(sf::RenderWindow& _window) :
 	//	throw std::runtime_error("Invalid File Name Detected, Exiting");	//Doesnt work
 
 	// Initilize Values
-	current_track = 0;
 	isVolume = true;
 	isTrackList = true;
 
 	MusicTrack.Import(MusicDirectory);
+	SongList = MusicTrack.List();
 }
 
 MusicPlayer::~MusicPlayer()
@@ -49,7 +49,7 @@ bool MusicPlayer::Update()
 		}
 
 		ImGui::SFML::Update(window_, deltaClock.restart());
-		ImGui::ShowTestWindow();
+		//ImGui::ShowTestWindow();	//ImGui Demo/Example Window
 
 		ImGui::Begin("Player"); // begin window
 		
@@ -69,7 +69,7 @@ bool MusicPlayer::Update()
 		const char* TimeChar = TrackTimeString.c_str();
 		ImGui::Text(TimeChar); // FIXME this seems hacky? float>string>const char*
 		ImGui::SameLine();
-		ImGui::ProgressBar(0.5f, ImVec2(0.0f, 0.0f));
+		ImGui::ProgressBar(MusicTrack.CurrentTime() / MusicTrack.Duration(), ImVec2(0.0f, 0.0f));
 		ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
 
 
@@ -140,7 +140,7 @@ bool MusicPlayer::Update()
 
 			ImGui::End();	// End Track List Window
 		}
-
+		
 		if (isTrackList)
 		{
 			ImGui::Begin("Track List");	// Begin Track List Window
@@ -150,27 +150,28 @@ bool MusicPlayer::Update()
 			This ListBox will attack to the bottom of the window.
 			Also makes use of vector instead of array since size of list may be unknown.
 			*/
-			/*if(ImGui::ListBoxHeader("", ImVec2(0.0f, -20.0f)))
+			if(ImGui::ListBoxHeader("", ImVec2(-10.0f, -10.0f)))
 			{
 				// Assume all items have even height (= 1 line of text). If you need items of different or variable sizes you can create a custom version of ListBox() in your code without using the clipper.
 				bool value_changed = false;
-				ImGuiListClipper clipper(FileList.size(), ImGui::GetTextLineHeightWithSpacing());
+				ImGuiListClipper clipper(MusicTrack.List().size(), ImGui::GetTextLineHeightWithSpacing());
 				while (clipper.Step())
 					for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
 					{
-						const bool item_selected = (i == current_track);
-						const char* item_text = FileList[i].c_str();
+						const bool item_selected = (i == MusicTrack.CurrentTrackID());
+						const char* item_text = SongList[i].c_str();
 
 						ImGui::PushID(i);
 						if (ImGui::Selectable(item_text, item_selected))
 						{
-							current_track = i;
+							//current_track = i;
+							MusicTrack.SetTrackID(i);
 							value_changed = true;
 						}
 						ImGui::PopID();
 					}
 				ImGui::ListBoxFooter();
-			}	// End Custom ListBox*/
+			}	// End Custom ListBox
 			ImGui::End();	// End Track List Window
 		}
 
