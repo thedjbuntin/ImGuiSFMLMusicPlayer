@@ -1,3 +1,9 @@
+/*
+Author: Duncan John Bunting - 2017
+GitHub Repo: https://github.com/thedjbuntin/ImGuiSFMLMusicPlayer/
+Website: http://duncanbunting.com/
+*/
+
 #include "MusicPlayer_Application.h"
 
 //Memory Leak Dumping	- There are memory leaks detected but cannot find anywhere in my code that would cause memory leak, for some reason will not tell where leaks are detected from- possibly imgui, sfml or dirent.
