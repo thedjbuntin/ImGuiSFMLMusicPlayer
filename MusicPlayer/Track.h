@@ -54,6 +54,10 @@ private:
 
 	int CurrentTrackID_;
 
+	//Stores the location and name of the placeholder image
+	const std::string PlaceholderArt = "music/placeholder.jpg";
+	//Initialized on start to load placeholder texture - avoids reloading image.
+
 	std::vector<std::string> FileList;
 	std::vector<std::string> SongName;		//Store Song Names	- Mainly for future development, would like to implement by Artist/Sortable Lists.
 	std::vector<std::string> ArtistName;	//Store Artist Names

@@ -1,4 +1,9 @@
-Place Music Files Here
+Place Music Files & Music Art Here
+
+Track Art should have the exact same name as the track, current the only accepted formats are .jpg and .png
+
+Please ensure Track Art is 512x512 Pixels. You can make it smaller but you will notice something similar to this: http://i.imgur.com/xIbJC2P.png.
+Nothing stopping you from making it larger, but it will increase the sprite size as I haven't been able to find a way to limit sprite size or control texture/sprite size other than relative scaling.
 
 ---
 
