@@ -150,7 +150,34 @@ void Track::StoreFileList(std::vector<std::string> &out, const std::string &dire
 		if (is_directory)
 			continue;
 
-		std::cout << "Storing: " << file_name << std::endl;
+		// Copy of below code, should probably function call instead.
+		std::string MP3_String = ".mp3";
+		if (full_file_name.find(MP3_String) != std::string::npos)
+		{
+			std::cout << "Oops! Looks like you're trying to use an .mp3 - Unfortunately SFML does not allow MP3s due to Patent issues.\nI recommend converting to and using .ogg for similar file size and audio quality" << std::endl;
+		}
+		else
+		{
+			std::string OGG_String = ".ogg";
+			if (full_file_name.find(OGG_String) != std::string::npos)
+			{
+				if (full_file_name.find('-') == std::string::npos)	// Check if correct Name Format
+				{
+					// ERROR - Skip Adding This Song
+					std::cout << "Error Loading: " << full_file_name << "- Skipping.\nPlease Ensure File Names are in the following format: Song Name - Artist Name" << std::endl;
+				}
+				else
+				{
+					std::cout << "Storing: " << file_name << std::endl;
+
+					out.push_back(full_file_name);
+				}
+			}
+			else
+			{
+				std::cout << "Ignoring non-OGG file: " << full_file_name << std::endl;
+			}
+		}
 
 		out.push_back(file_name);
 	} while (FindNextFile(dir, &file_data));
@@ -187,7 +214,6 @@ void Track::StoreFileList(std::vector<std::string> &out, const std::string &dire
 			std::string OGG_String = ".ogg";
 			if (full_file_name.find(OGG_String) != std::string::npos)
 			{
-				std::cout << full_file_name << " ___ APPROVED FOR OGG" << std::endl;
 				if (full_file_name.find('-') == std::string::npos)	// Check if correct Name Format
 				{
 					// ERROR - Skip Adding This Song
