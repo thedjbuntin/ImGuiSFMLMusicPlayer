@@ -28,9 +28,10 @@ private:
 	int TrackArtID;
 	std::vector<std::string> SongList;
 	std::vector<sf::Texture> TrackArtTexture;
+	ImGuiWindowFlags window_flags;
 
 	const std::string MusicDirectory = "music";
-	const char* cPlay = "Play";
+	const char* cPlay = "Play";	//Play/Pause Button Text
 	const char* cPause = "Pause";
 	bool isVolume, isTrackList, isSeeker;
 };

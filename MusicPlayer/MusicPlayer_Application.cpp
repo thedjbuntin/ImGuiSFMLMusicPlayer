@@ -6,8 +6,14 @@ MusicPlayer::MusicPlayer(sf::RenderWindow& _window) :
 {
 	window_.resetGLStates(); // call it if you only draw ImGui. Otherwise not needed.
 
+	// Desired Window Settings, removed for more user customization, use NoMove, NoCollapse and NoResize for more "User Friendly" and clean approach
+	window_flags |= ImGuiWindowFlags_NoMove;
+	window_flags |= ImGuiWindowFlags_NoCollapse;
+	//window_flags |= ImGuiWindowFlags_NoTitleBar;
+	//window_flags |= ImGuiWindowFlags_NoResize;	//commented out because for some reason if resize is disabled defaults to minimum sizes rather than predefined preferences.
+
 	//if (!LoadMusic(FileList))
-	//	throw std::runtime_error("Invalid File Name Detected, Exiting");	//Doesnt work
+	//	throw std::runtime_error("Invalid File Name Detected, Exiting");	//Doesnt work - sends exception but doesnt show message. - If uncommenting this make sure to uncomment the try/catch in main.cpp
 
 	// Initilize Values
 	isVolume = true;
@@ -23,6 +29,11 @@ MusicPlayer::MusicPlayer(sf::RenderWindow& _window) :
 		tempTexture.loadFromFile(MusicTrack.ArtPath(i));
 		TrackArtTexture.push_back(tempTexture);	//no need to check this since its already checked in Track Class
 	}
+
+	if (MusicTrack.List().size() == 0)
+	{
+		std::cout << "\n\n NO MUSIC FOUND !!!\nPlace .ogg files /music/ folder." << std::endl;
+	}
 }
 
 MusicPlayer::~MusicPlayer()
@@ -30,7 +41,8 @@ MusicPlayer::~MusicPlayer()
 
 bool MusicPlayer::Run()
 {
-	Update();
+	if (MusicTrack.List().size() != 0)	//Only Update if music has been loaded/stored
+		Update();
 
 	return 0;
 }
@@ -60,13 +72,12 @@ bool MusicPlayer::Update()
 		ImGui::SFML::Update(window_, deltaClock.restart());
 		//ImGui::ShowTestWindow();	//ImGui Demo/Example Window
 
-		ImGui::Begin("Player"); // begin window
-		
+		ImGui::Begin("Player", nullptr, window_flags); // begin window
+
 		ImGui::Text(MusicTrack.Name().c_str());
 		ImGui::Text(MusicTrack.Artist().c_str());
 
-		
-		std::string SecondsString = std::to_string(int(MusicTrack.CurrentTime())%60);
+		std::string SecondsString = std::to_string(int(MusicTrack.CurrentTime()) % 60);
 		if (SecondsString.size() == 1)
 			SecondsString = "0" + SecondsString;
 		std::string MinutesString = std::to_string(int(MusicTrack.CurrentTime() / 60.0f));
@@ -92,7 +103,6 @@ bool MusicPlayer::Update()
 		}
 		ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
 
-
 		// Reuse previous Temp Strings to create new
 		SecondsString = std::to_string(int(MusicTrack.Duration()) % 60);
 		if (SecondsString.size() == 1)
@@ -114,7 +124,7 @@ bool MusicPlayer::Update()
 		{
 			MusicTrack.Stop();
 		} ImGui::SameLine();
-		
+
 		if (ImGui::Button((MusicTrack.isPlaying()) ? (cPause) : (cPlay)))	// Play/Pause Playback
 		{
 			MusicTrack.PlayPause();
@@ -128,7 +138,7 @@ bool MusicPlayer::Update()
 		if (ImGui::Button(">|"))	//Previous Song
 		{
 			MusicTrack.Next();
-		} 
+		}
 
 		if (ImGui::Button("Volume"))	//Toggle Show Volume
 		{
@@ -149,7 +159,7 @@ bool MusicPlayer::Update()
 
 		if (isVolume)
 		{
-			ImGui::Begin("Volume");	// Begin Track List Window
+			ImGui::Begin("Volume", nullptr, window_flags);	// Begin Track List Window
 			ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor::HSV(7.0f, 0.5f, 0.5f));
 			ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImColor::HSV(7.0f, 0.6f, 0.5f));
 			ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImColor::HSV(7.0f, 0.7f, 0.5f));
@@ -165,17 +175,17 @@ bool MusicPlayer::Update()
 
 			ImGui::End();	// End Track List Window
 		}
-		
+
 		if (isTrackList)
 		{
-			ImGui::Begin("Track List");	// Begin Track List Window
+			ImGui::Begin("Track List", nullptr, window_flags);	// Begin Track List Window
 
 			/*
 			Custom ListBox due to ImGui ListBox not supporting unlimited height.
 			This ListBox will attack to the bottom of the window.
 			Also makes use of vector instead of array since size of list may be unknown.
 			*/
-			if(ImGui::ListBoxHeader("", ImVec2(-10.0f, -10.0f)))
+			if (ImGui::ListBoxHeader("", ImVec2(-10.0f, -10.0f)))
 			{
 				// Assume all items have even height (= 1 line of text). If you need items of different or variable sizes you can create a custom version of ListBox() in your code without using the clipper.
 				bool value_changed = false;
@@ -211,7 +221,7 @@ bool MusicPlayer::Update()
 		window_.draw(TrackArt);
 		ImGui::SFML::Render(window_);
 		window_.display();
-	}
+	} // End of window_isOpen()
 
 	return 0;
 }
