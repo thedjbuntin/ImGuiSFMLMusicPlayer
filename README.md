@@ -1,5 +1,5 @@
 # ImGui SFML Music Player
-Music Player using ImGui + SFML
+C++ Music Player using ImGui + SFML
 
 Done as part of a code test & may continue afterwards for learning imgui & SFML.
 
