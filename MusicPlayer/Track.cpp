@@ -270,7 +270,7 @@ bool Track::LoadSFMLMusic()
 		if (!ptr->openFromFile(FileList[i]))
 		{
 			// ERROR
-			std::cout << "Critical Failure: File - " << FileList[i] << " Failed To Load" << std::cout;
+			std::cout << "Critical Failure: File - " << FileList[i] << " Failed To Load" << std::endl;
 			return false;
 		}
 
