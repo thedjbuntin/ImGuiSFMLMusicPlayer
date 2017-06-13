@@ -5,7 +5,8 @@ Track::Track()
 	volume_ = 50.0f;
 	isPlaying_ = false;
 	isAutoPlay = true;	//Added just for further customization, defaulting to true - possible future development would add option to disable autoplay.
-
+	if(!PlaceholderTexture.loadFromFile(PlaceholderArtPath))
+		std::cout << "Critical Failure: Failed to load PlaceHolder Art..." << std::endl;
 }
 
 Track::~Track()
@@ -220,16 +221,10 @@ void Track::StoreInfo()
 			std::cout << "Failed To Find PNG Art for " << File_Name << std::endl;
 			if (!texture.loadFromFile(File_Name + ".jpg"))
 			{
-				std::cout << "Failed To Find JPG Art for " << File_Name << " - Placeholder Art Inserted." << std::endl;
-				
-				if (!texture.loadFromFile(PlaceholderArt))
-					std::cout << "Critical Failure: Failed to load PlaceHolder Art..." << std::endl;
-				else
-				{
-					ArtTexture.push_back(texture);
-					ArtPath_.push_back(PlaceholderArt);
-					std::cout << "To add Track Art, place a PNG or JPG file with the exact same name as the Track file in the same location as the track." << std::endl;
-				}
+				std::cout << "Failed To Find JPG Art for " << File_Name << "\n - Placeholder Art Inserted." << std::endl;
+				ArtTexture.push_back(PlaceholderTexture);
+				ArtPath_.push_back(PlaceholderArtPath);
+				std::cout << "To add Track Art, place a PNG or JPG file with the exact same name as the Track file in the same location as the track." << std::endl;
 			}
 			else
 			{	//Successfully loaded JPG
