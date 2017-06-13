@@ -1,39 +1,36 @@
 # ImGui SFML Music Player
 C++ Music Player using ImGui + SFML
 
-Done as part of a code test & may continue afterwards for learning imgui & SFML.
+Welcome to my first ever open source program! Done as part of a code test & may continue afterwards for learning imgui & SFML.
 
-Decided to make this open source since there wasn't any ImGui + SFML Music Player examples, thought I may as well.
+Decided to make this open source since there wasn't anything out there that used ImGui and SFML together to make a music player, thought I may as well.
 
-This is the first time I've made anything open-source. I've only just started and thought I'd get it up on GitHub sooner than later! So at the moment its extremely early stages of development, I have a lot of things to do but I hope to have first release done for 13/06/17. (also sorry if I forget to edit this)
+This is the first time I've made anything open-source, so appologise if I haven't done something properly. I got it uploaded very early so if you want you can go checkout the awful code I began with while learning ImGui and SFML.
 
 More About Me: http://duncanbunting.com
 
----
-
-Early Development Issue Tracking: https://docs.google.com/spreadsheets/d/1c5FJh6jmOxvn2W8SCCa5x8n5d-v1SeSz_31nJoxhd5w/edit?usp=sharing
-- To avoid an insane number of issues on GitHub (and that I've never used GitHub Issues before) the first stage of issue tracking (aka my To-Do list) can be found at the above Google Doc link.
-- Once first release (13th or 14th) I will switch to GitHub Issues and leave the Google Doc
+Feel free to message/email me if you have any questions.
 
 ---
 
-Download following to allow to work:
+I will not longer be using it, and instead GitHub Issues but to show where it all began here's the early development issue tracking spreadsheet i madeup: https://docs.google.com/spreadsheets/d/1c5FJh6jmOxvn2W8SCCa5x8n5d-v1SeSz_31nJoxhd5w/edit?usp=sharing
+
+---
+
+This project makes use of SFML 2.4.2, ImGui and Dirent. Everything is included in the repo so you don't have to set anything up.
 
 SFML 2.4.2 : https://www.sfml-dev.org/download/sfml/2.4.2/
-
-- Follow instructions here: https://www.sfml-dev.org/tutorials/2.3/start-vc.php for adjusting Include and Library Directories
-- Ensure to manually add approriate .dlls to project directory: http://i.imgur.com/k3pUdO9.png
+- Used for displaying Track Art and playing Music.
+- The only problem that may occur related to SFML after cloning is missing .dll files, simply take the .dll files SFML provides in its download and place in the solution directory: http://i.imgur.com/k3pUdO9.png
 
 ImGui : https://github.com/ocornut/imgui
+- Used for the UI
 
 ImGui SFML : https://github.com/eliasdaler/imgui-sfml
 
-- Follow instructions to merging imgui & sfml in the above link.
-- You will likely need to re-add imgui files to the build/project: http://i.imgur.com/0Gxstmg.png
-
----
 
 Dirent : http://softagalleria.net/dirent.php
+- Used for loading files from the music folder
+- This is irrelevent with C++17, the best thing to do is upgrade to C++17 and use filesystem to load the files - For now however this program uses dirent.h to load the files.
 
-- Required for File List Lookup
-- Follow instructions at link above for dirent.h placement
+---
