@@ -26,7 +26,9 @@ private:
 	sf::Clock deltaClock;
 	Track MusicTrack;
 	sf::Sprite TrackArt;
+	int TrackArtID;
 	std::vector<std::string> SongList;
+	std::vector<sf::Texture> TrackArtTexture;
 
 	const std::string MusicDirectory = "music";
 	const char* cPlay = "Play";

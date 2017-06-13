@@ -1,5 +1,6 @@
 #include "MusicPlayer_Application.h"
 
+
 MusicPlayer::MusicPlayer(sf::RenderWindow& _window) :
 	window_(_window)
 {
@@ -11,9 +12,17 @@ MusicPlayer::MusicPlayer(sf::RenderWindow& _window) :
 	// Initilize Values
 	isVolume = true;
 	isTrackList = true;
+	TrackArtID = 99;	//set to any number other than 0 so it resets when checking in Update();
 
 	MusicTrack.Import(MusicDirectory);
 	SongList = MusicTrack.List();
+	for (unsigned int i = 0; i < MusicTrack.List().size(); i++)
+	{
+		std::cout << "App Storing Texture: " << MusicTrack.ArtPath(i) << std::endl;
+		sf::Texture tempTexture;
+		tempTexture.loadFromFile(MusicTrack.ArtPath(i));
+		TrackArtTexture.push_back(tempTexture);	//no need to check this since its already checked in Track Class
+	}
 }
 
 MusicPlayer::~MusicPlayer()
@@ -191,10 +200,12 @@ bool MusicPlayer::Update()
 			ImGui::End();	// End Track List Window
 		}
 
-		// Horribly Horribly Ineffiecent
-		sf::Texture texture;
-		texture.loadFromFile(MusicTrack.ArtPath());
-		TrackArt.setTexture(texture);
+		// Check if Art needs updated
+		if (TrackArtID != MusicTrack.CurrentTrackID())
+		{
+			TrackArt.setTexture(TrackArtTexture[MusicTrack.CurrentTrackID()]);
+			TrackArtID = MusicTrack.CurrentTrackID();
+		}
 
 		window_.clear();
 		window_.draw(TrackArt);

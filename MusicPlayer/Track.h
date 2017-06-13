@@ -40,6 +40,7 @@ public:
 	std::string Name() const { return SongName[CurrentTrackID_]; }
 	sf::Texture Art() const { return ArtTexture[CurrentTrackID_]; }
 	std::string ArtPath() const { return ArtPath_[CurrentTrackID_]; }
+	std::string ArtPath(const int TrackID) const { return ArtPath_[TrackID]; }
 
 	std::vector<std::string> List() const { return SongName; }
 
@@ -68,7 +69,7 @@ private:
 	std::vector<std::string> SongName;		//Store Song Names	- Mainly for future development, would like to implement by Artist/Sortable Lists.
 	std::vector<std::string> ArtistName;	//Store Artist Names
 	std::vector<std::unique_ptr<sf::Music>> MusicTrack;		//unique_ptr instead of standard sf::Music vector as Music is NonCopyable - https://en.sfml-dev.org/forums/index.php?topic=18043.0
-	std::vector<sf::Texture> ArtTexture;
-	std::vector<std::string> ArtPath_;
+	std::vector<sf::Texture> ArtTexture;	//Store ArtTexture in a vector for now, not used currently since texture is destroyed when StoreInfo() finishes. Possibly useful for future development.
+	std::vector<std::string> ArtPath_;		//Store the ArtTexture Path as a temporary fix around the problem of Texture's being untransferable, instead Application asks for path and loads itself.
 
 };
