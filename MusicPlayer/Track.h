@@ -2,7 +2,7 @@
 
 #include "sfml.h"
 #include <iostream>
-#include <dirent.h>
+#include "dirent.h"
 #include <sys/stat.h>
 #include <vector>
 #include <memory>
