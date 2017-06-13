@@ -3,7 +3,6 @@
 #include "sfml.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
-#include <dirent.h>
 #include <sys/stat.h>
 #include "Track.h"
 
