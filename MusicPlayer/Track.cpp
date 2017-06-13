@@ -5,8 +5,7 @@ Track::Track()
 	volume_ = 50.0f;
 	isPlaying_ = false;
 	isAutoPlay = true;	//Added just for further customization, defaulting to true - possible future development would add option to disable autoplay.
-	if(!PlaceholderTexture.loadFromFile(PlaceholderArtPath))
-		std::cout << "Critical Failure: Failed to load PlaceHolder Art..." << std::endl;
+	isPlaceholderTextureLoaded = false;
 }
 
 Track::~Track()
@@ -221,10 +220,31 @@ void Track::StoreInfo()
 			std::cout << "Failed To Find PNG Art for " << File_Name << std::endl;
 			if (!texture.loadFromFile(File_Name + ".jpg"))
 			{
-				std::cout << "Failed To Find JPG Art for " << File_Name << "\n - Placeholder Art Inserted." << std::endl;
-				ArtTexture.push_back(PlaceholderTexture);
-				ArtPath_.push_back(PlaceholderArtPath);
-				std::cout << "To add Track Art, place a PNG or JPG file with the exact same name as the Track file in the same location as the track." << std::endl;
+				std::cout << "Failed To Find JPG Art for " << File_Name << "\n - Attempting to insert Placeholder Art." << std::endl;
+
+				if (!isPlaceholderTextureLoaded)
+				{
+					if (!PlaceholderTexture.loadFromFile(PlaceholderArtPath))
+					{
+						std::cout << "Critical Failure: Failed to load PlaceHolder Art..." << std::endl;
+					}
+					else
+					{
+						std::cout << "Storing: Placeholder Texture" << std::endl;
+						isPlaceholderTextureLoaded = true;
+					}
+				}
+
+				if (isPlaceholderTextureLoaded)
+				{
+					ArtTexture.push_back(PlaceholderTexture);
+					ArtPath_.push_back(PlaceholderArtPath);
+					std::cout << "To add Track Art, place a PNG or JPG file with the exact same name as the Track file in the same location as the track." << std::endl;
+				}
+				else
+				{
+					std::cout << "Critical Failure: Placeholder Art was not loaded, ensure file music/placeholder.jpg exists" << std::endl;
+				}
 			}
 			else
 			{	//Successfully loaded JPG
@@ -248,14 +268,17 @@ bool Track::LoadSFMLMusic()
 	{
 		auto ptr = std::make_unique<sf::Music>();
 		if (!ptr->openFromFile(FileList[i]))
-			return false; /* error */
+		{
+			// ERROR
+			std::cout << "Critical Failure: File - " << FileList[i] << " Failed To Load" << std::cout;
+			return false;
+		}
 
 		MusicTrack.push_back(std::move(ptr));
 		MusicTrack[i]->setVolume(volume_);	//set volume to default volume for all tracks initially
 		std::cout << "Loaded: " << FileList[i] << std::endl;
 
 		/* // Does not work as sf::Music is NonCopyable
-
 		sf::Music TempTrack;
 		if (!TempTrack.openFromFile(FileList[i]))
 			return false; // Error

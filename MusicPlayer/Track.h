@@ -58,6 +58,7 @@ private:
 	const std::string PlaceholderArtPath = "music/placeholder.jpg";
 	//Initialized on start to load placeholder texture - avoids reloading image.
 	sf::Texture PlaceholderTexture;
+	bool isPlaceholderTextureLoaded;
 
 	std::vector<std::string> FileList;
 	std::vector<std::string> SongName;		//Store Song Names	- Mainly for future development, would like to implement by Artist/Sortable Lists.
