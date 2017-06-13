@@ -26,7 +26,7 @@ public:
 
 	// Returns Current Tracks Current Time (/Play Offeset) as Seconds.
 	float CurrentTime() const { return MusicTrack[CurrentTrackID_]->getPlayingOffset().asSeconds(); }
-	//void CurrentTime(const float _seek_time) { current_time = _seek_time; }
+	void SetCurrentTime(const float _seek_time) { MusicTrack[CurrentTrackID_]->setPlayingOffset(sf::seconds(_seek_time)); }
 
 	// Returns Current Tracks Duration as Seconds.
 	float Duration() const { return MusicTrack[CurrentTrackID_]->getDuration().asSeconds(); }

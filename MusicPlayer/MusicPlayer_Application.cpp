@@ -69,7 +69,18 @@ bool MusicPlayer::Update()
 		const char* TimeChar = TrackTimeString.c_str();
 		ImGui::Text(TimeChar); // FIXME this seems hacky? float>string>const char*
 		ImGui::SameLine();
-		ImGui::ProgressBar(MusicTrack.CurrentTime() / MusicTrack.Duration(), ImVec2(0.0f, 0.0f));
+		if (isSeeker)
+		{
+			static float CurrentTrackTime = MusicTrack.CurrentTime();
+			CurrentTrackTime = MusicTrack.CurrentTime();
+			ImGui::SliderFloat("", &CurrentTrackTime, 0.0f, MusicTrack.Duration(), "");
+			if (CurrentTrackTime != MusicTrack.CurrentTime())
+				MusicTrack.SetCurrentTime(CurrentTrackTime);
+		}
+		else
+		{
+			ImGui::ProgressBar(MusicTrack.CurrentTime() / MusicTrack.Duration(), ImVec2(0.0f, 0.0f));
+		}
 		ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
 
 
@@ -113,6 +124,11 @@ bool MusicPlayer::Update()
 		if (ImGui::Button("Volume"))	//Toggle Show Volume
 		{
 			isVolume = !isVolume;
+		} ImGui::SameLine();
+
+		if (ImGui::Button("Seeker"))	//Toggle Seeker Slider
+		{
+			isSeeker = !isSeeker;
 		} ImGui::SameLine();
 
 		if (ImGui::Button("Track List"))	//Toggle Track List Window

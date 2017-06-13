@@ -31,5 +31,5 @@ private:
 	const std::string MusicDirectory = "music";
 	const char* cPlay = "Play";
 	const char* cPause = "Pause";
-	bool isVolume, isTrackList;
+	bool isVolume, isTrackList, isSeeker;
 };
